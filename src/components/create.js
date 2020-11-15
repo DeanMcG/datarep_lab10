@@ -1,5 +1,6 @@
 import React from 'react';
 import App from '../App';
+import axios from 'axios';
 
 
 export class Create extends React.Component {
@@ -20,12 +21,14 @@ export class Create extends React.Component {
     }
 
 
+    //Changes title
     onChangeTitle(e) {
         this.setState({
             Title: e.target.value
         });
     }
 
+    //Changes year
     onChangeYear(e) {
         this.setState({
             Year: e.target.value
@@ -33,16 +36,32 @@ export class Create extends React.Component {
     }
 
 
+    //Changes poster
     onChangePoster(e) {
         this.setState({
             Poster: e.target.value
         });
     }
 
+    //Method for submit button
     onSubmit(e) {
         e.preventDefault();
         alert("Movie: " + this.state.Title + " " + this.state.Year + " " + this.state.Poster)
+        const newMovie = {
+            title: this.state.Title,
+            year: this.state.Year,
+            poster: this.state.Poster
+        }
+        axios.post('http://localhost:4000/api/movies',newMovie)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
     }
+
+    //Form to add movie
     render() {
         return (
             <div className='App'>
