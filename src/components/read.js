@@ -18,7 +18,7 @@ export class Read extends React.Component {
             .then(
 
                 (response) => {
-                    this.setState({ movies: response.data.movies })
+                    this.setState({ movies: response.data})
                 }
             )
             .catch(
